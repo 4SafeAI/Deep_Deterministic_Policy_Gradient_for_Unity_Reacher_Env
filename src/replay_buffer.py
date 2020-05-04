@@ -12,9 +12,13 @@ class ReplayBuffer:
         """Initialize a ReplayBuffer object.
 
         Args:
-            buffer_size (int): maximum size of buffer
+            buffer_size (int): maximum size of buffer.
 
-            batch_size (int): size of each training batch
+            batch_size (int): size of each training batch.
+
+            seed (int): random seed.
+
+            device (int): device to perform calculations on.
         """
         self.memory = deque(maxlen=buffer_size)
         self.batch_size = batch_size
@@ -23,7 +27,7 @@ class ReplayBuffer:
         self.device = device
 
     def add(self, state, action, reward, next_state, done):
-        """Add a new experience to memory."""
+        """Add the tuple (s, a, r, s', d) as a new experience to memory."""
         experience = self.experience(state, action, reward, next_state, done)
         self.memory.append(experience)
 
